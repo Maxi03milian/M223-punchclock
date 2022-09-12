@@ -21,13 +21,15 @@ public class EntryController {
     }
 
     @PostMapping("/entry")
-    public void postEntry(@RequestBody Entry entry) {
+    public Entry postEntry(@RequestBody Entry entry) {
         entryService.addEntry(entry);
+        return entry;
     }
 
     @PutMapping("/entry/{id}")
-    public void putEntry(@PathVariable Long id, @RequestBody Entry entry) {
+    public Entry putEntry(@PathVariable Long id, @RequestBody Entry entry) {
         entryService.updateEntry(id, entry);
+        return entry;
     }
 
     @DeleteMapping("/entry/{id}")
