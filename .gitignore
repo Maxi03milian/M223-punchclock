@@ -2,3 +2,5 @@
 .DS_Store
 .idea
 *mysql_db_data
+
+/docker-compose.yml
