@@ -4,3 +4,4 @@
 *mysql_db_data
 
 /docker-compose.yml
+/target
