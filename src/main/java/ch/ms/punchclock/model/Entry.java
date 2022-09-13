@@ -37,4 +37,5 @@ public class Entry {
         this.checkOut = checkOut;
     }
 
+
 }
