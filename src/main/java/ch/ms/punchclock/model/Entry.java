@@ -1,5 +1,7 @@
 package ch.ms.punchclock.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -8,6 +10,10 @@ public class Entry {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
 
     private LocalDateTime checkIn = LocalDateTime.now();
 
@@ -35,6 +41,14 @@ public class Entry {
 
     public void setCheckOut(LocalDateTime checkOut) {
         this.checkOut = checkOut;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
 

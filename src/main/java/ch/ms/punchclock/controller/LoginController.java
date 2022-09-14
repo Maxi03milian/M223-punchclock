@@ -22,7 +22,7 @@ public class LoginController {
     @PostMapping("/auth/login")
     public ResponseEntity login(@RequestBody User user) {
 
-        if (userService.checkUserCredentials(user)) {
+        if (userService.checkUserCredentials(user.getUsername(), user.getPassword())) {
             String secret = "123@abc";
             Algorithm algorithm = Algorithm.HMAC512(secret);
             String token = JWT.create()

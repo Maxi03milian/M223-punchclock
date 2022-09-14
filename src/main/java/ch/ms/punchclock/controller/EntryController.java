@@ -24,9 +24,9 @@ public class EntryController {
     }
 
     @PostMapping("/entry")
-    public ResponseEntity postEntry(@RequestBody Entry entry) {
+    public ResponseEntity postEntry(@RequestBody Entry entry, @RequestHeader("Authorization") String token) {
         if (entry.getCheckIn().isBefore(entry.getCheckOut())) {
-            entryService.addEntry(entry);
+            entryService.addEntry(entry, token);
             return new ResponseEntity(entry, HttpStatus.OK);
         }else {
             return new ResponseEntity("Error: Check in time must be before checkout Time" , HttpStatus.BAD_REQUEST);

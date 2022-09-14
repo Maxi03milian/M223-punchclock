@@ -15,11 +15,8 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public boolean checkUserCredentials(User user) {
-        List<User> allUsers = (List<User>) userRepository.findAll();
-        if(allUsers.contains(user))
-            return true;
-        return false;
-
+    public boolean checkUserCredentials(String username, String password) {
+        return userRepository.existsByUsernameAndPassword(username, password);
     }
+
 }

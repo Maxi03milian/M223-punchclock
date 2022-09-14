@@ -1,7 +1,12 @@
 package ch.ms.punchclock.service;
 
+import antlr.Token;
 import ch.ms.punchclock.model.Entry;
 import ch.ms.punchclock.repository.EntityRepository;
+import ch.ms.punchclock.repository.UserRepository;
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.JWTVerificationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,8 +24,9 @@ public class EntryService {
         return (List<Entry>) entityRepository.findAll();
     }
 
-    public void addEntry(Entry entry){
+    public void addEntry(Entry entry, String token){
         entityRepository.save(entry);
+
     }
 
     public void updateEntry(Long id, Entry entry) {
@@ -34,7 +40,19 @@ public class EntryService {
         entityRepository.deleteById(id);
     }
 
+    public boolean isTokenValid(String token) {
+        try {
+            JWT.require(Algorithm.HMAC256("123@abc"))
+                    .build()
+                    .verify(token);
 
+
+        } catch (JWTVerificationException e) {
+            throw new JWTVerificationException("Invalid Token");
+        }
+
+        return true;
+    }
 
 
 }
